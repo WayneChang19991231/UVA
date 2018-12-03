@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdlib>
+ 
+using namespace std;
+ 
+int prime[1000000];
+ 
+long rev( long dat )//line11~14看不懂
+{
+	long now = 0;
+	while ( dat ) {
+		now *= 10;
+		now += dat%10;
+		dat /= 10;
+	}
+	return now;
+}
+ 
+int main()
+{
+	//打表计算素数
+	for ( long i = 0 ; i < 1000000 ; ++ i )
+		prime[i] = 1;
+	for ( long i = 2 ; i < 1000000 ; ++ i )
+		if ( prime[i] )
+			for ( long j = 2*i ; j < 1000000 ; j += i )
+				prime[j] = 0;
+	
+	long n;
+	while ( cin >> n ) {
+		cout << n;
+		if ( !prime[n] )
+			cout << " is not prime.\n";
+		else if ( n != rev(n) && prime[rev(n)] )
+			cout << " is emirp.\n";
+		else cout << " is prime.\n";
+	}
+	return 0;
+}
+
+--------------------- 
+作者：小白菜又菜 
+来源：CSDN 
+原文：https://blog.csdn.net/mobius_strip/article/details/13804687 
+版权声明：本文为博主原创文章，转载请附上博文链接！
